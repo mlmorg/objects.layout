@@ -14,6 +14,7 @@ $inuit-layout-gutter:           $inuit-base-spacing-unit !default;
 $inuit-layout-gutter--small:    halve($inuit-layout-gutter) !default;
 $inuit-layout-gutter--large:    double($inuit-layout-gutter) !default;
 
+$inuit-enable-layout:           true !default;
 $inuit-enable-layout--small:    false !default;
 $inuit-enable-layout--large:    false !default;
 $inuit-enable-layout--flush:    false !default;
@@ -36,38 +37,42 @@ $inuit-global-border-box: false !default;
 
 
 
-/**
- * Begin a layout group.
- */
-.#{$inuit-namespace}layout,
-%#{$inuit-namespace}layout {
-    list-style: none;
-    margin:  0;
-    padding: 0;
-    margin-left: -$inuit-layout-gutter;
-}
+@if ($inuit-enable-layout == true) {
 
     /**
-     * 1. Cause columns to stack side-by-side.
-     * 2. Space columns apart.
-     * 3. Align columns to the tops of each other.
-     * 4. Full-width unless told to behave otherwise.
-     * 5. Required to combine fluid widths and fixed gutters.
+     * Begin a layout group.
      */
-    .#{$inuit-namespace}layout__item,
-    %#{$inuit-namespace}layout__item {
-        display: inline-block; /* [1] */
-        padding-left: $inuit-layout-gutter; /* [2] */
-        vertical-align: top; /* [3] */
-        width: 100%; /* [4] */
+    .#{$inuit-namespace}layout,
+    %#{$inuit-namespace}layout {
+        list-style: none;
+        margin:  0;
+        padding: 0;
+        margin-left: -$inuit-layout-gutter;
+    }
 
-        @if $inuit-global-border-box == false {
-            -webkit-box-sizing: border-box; /* [5] */
-               -moz-box-sizing: border-box; /* [5] */
-                    box-sizing: border-box; /* [5] */
+        /**
+         * 1. Cause columns to stack side-by-side.
+         * 2. Space columns apart.
+         * 3. Align columns to the tops of each other.
+         * 4. Full-width unless told to behave otherwise.
+         * 5. Required to combine fluid widths and fixed gutters.
+         */
+        .#{$inuit-namespace}layout__item,
+        %#{$inuit-namespace}layout__item {
+            display: inline-block; /* [1] */
+            padding-left: $inuit-layout-gutter; /* [2] */
+            vertical-align: top; /* [3] */
+            width: 100%; /* [4] */
+
+            @if $inuit-global-border-box == false {
+                -webkit-box-sizing: border-box; /* [5] */
+                   -moz-box-sizing: border-box; /* [5] */
+                        box-sizing: border-box; /* [5] */
+            }
+
         }
 
-    }
+}
 
 
 
